@@ -2,14 +2,18 @@ import AwesomeSlider from 'react-awesome-slider';
 
 export default function Content() {
     return (
-        <div>
-            <h1>Слайдер</h1>
+        <div className="sliderPage">
+
+            <h1 className="sliderTitle">
+                Галерея животных
+            </h1>
 
             <AwesomeSlider>
-                <div>Первый слайд</div>
-                <div>Второй слайд</div>
-                <div>Третий слайд</div>
+                <div data-src="/images/pic1.jpg" />
+                <div data-src="/images/pic2.jpg" />
+                <div data-src="/images/pic3.jpg" />
             </AwesomeSlider>
+
         </div>
     );
 }
