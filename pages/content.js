@@ -11,7 +11,7 @@ export default function Content() {
             <AwesomeSlider>
                 <div data-src="/images/pic1.jpg" />
                 <div data-src="/images/pic2.jpg" />
-                <div data-src="/images/pic3.jpg" />
+                <div data-src="/images/pic3.png" />
             </AwesomeSlider>
 
         </div>

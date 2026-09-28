@@ -10,6 +10,7 @@ export default function Shops() {
     const [name, setName] = React.useState('');
     const [lat, setLat] = React.useState('');
     const [lon, setLon] = React.useState('');
+    const [comment, setComment] = React.useState('');
 
     React.useEffect(() => {
         fetch('/api/shops')
@@ -21,7 +22,8 @@ export default function Shops() {
         const newShop = {
             name,
             lat: Number(lat),
-            lon: Number(lon)
+            lon: Number(lon),
+            comment
         };
 
         const response = await fetch('/api/shops', {
@@ -34,9 +36,11 @@ export default function Shops() {
 
         if (response.ok) {
             setShops([...shops, newShop]);
+
             setName('');
             setLat('');
             setLon('');
+            setComment('');
         }
     };
 
@@ -58,12 +62,28 @@ export default function Shops() {
                             key={index}
                             geometry={[shop.lat, shop.lon]}
                             properties={{
-                                balloonContent: shop.name
+                                balloonContentHeader: shop.name,
+                                balloonContentBody: shop.comment
                             }}
                         />
                     ))}
                 </Map>
             </YMaps>
+            <h2>Список зоомагазинов</h2>
+
+            {shops.map((shop, index) => (
+                <div key={index}>
+                    <h3>{shop.name}</h3>
+
+                    <p>
+                        Координаты: {shop.lat}, {shop.lon}
+                    </p>
+
+                    <p>
+                        Комментарий: {shop.comment}
+                    </p>
+                </div>
+            ))}
 
             <h2>Добавить зоомагазин</h2>
 
@@ -84,7 +104,11 @@ export default function Shops() {
                 value={lon}
                 onChange={(e) => setLon(e.target.value)}
             />
-
+            <input
+                placeholder="Комментарий"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+            />
             <button onClick={addShop}>
                 Добавить
             </button>
